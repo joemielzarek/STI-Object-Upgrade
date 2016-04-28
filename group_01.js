@@ -3,18 +3,30 @@
 //The third index contains their annual salary.
 //The fourth index contains their review rating.
 
-var atticus = ['Atticus', '2405', '47000', 3];
-var jem = ['Jem', '62347', '63500', 4];
-var boo = ['Boo', '11435', '54000', 3];
-var scout = ['Scout', '6243', '74750', 5];
+//ORIGINAL CODE FOR ARRAY
+
+//  var atticus = ['Atticus', '2405', '47000', 3];
+//  var jem = ['Jem', '62347', '63500', 4];
+//  var boo = ['Boo', '11435', '54000', 3];
+//  var scout = ['Scout', '6243', '74750', 5];
+
+function Person(empName, empNum, annualSal, reviewRating) {
+  this.name = empName;
+  this.number = empNum;
+  this.salary = annualSal;
+  this.rating = reviewRating;
+}
+
+var atticus = new Person('Atticus', '2405', '47000', 3);
+var jem = new Person('Jem', '62347', '63500', 4);
+var boo =  new Person('Boo', '11435', '54000', 3);
+var scout = new Person('Scout', '6243', '74750', 5);
 
 var employees = [atticus, jem, boo, scout];
 
-var employees2 = [];
-
 var bonusPer = 0;
 
-function logic(arg) {
+function logic(Person) {
 
   var localArray = [];
 
@@ -22,7 +34,7 @@ function logic(arg) {
 
   var bonusPSum = 1;
 
-  if (arg[3] <= 2) {
+  if (Person.rating <= 2) {
     bonusPSum = 1;
     if (arg[1].length == 4) {
       bonusPSum += 0.05;
@@ -30,27 +42,27 @@ function logic(arg) {
         bonusPSum -= 0.01;
       }
     }
-  } else if (arg[3] === 3) {
+  } else if (Person.rating === 3) {
     bonusPSum += 0.04;
-    if (arg[1].length == 4) {
+    if (Person.number.length == 4) {
       bonusPSum += 0.05;
-      if (Number(arg[2]) > 65000) {
+      if (Number(Person.salary) > 65000) {
         bonusPSum -= 0.01;
       }
     }
-  } else if (arg[3] === 4) {
+  } else if (Person.rating === 4) {
     bonusPSum += 0.06;
-    if (arg[1].length == 4) {
+    if (Person.number.length == 4) {
       bonusPSum += 0.05;
-      if (Number(arg[2]) > 65000) {
+      if (Number(Person.salary) > 65000) {
         bonusPSum -= 0.01;
       }
     }
-  } else if (arg[3] === 5) {
+  } else if (Person.rating === 5) {
     bonusPSum += 0.10;
-    if (arg[1].length == 4) {
+    if (Person.number.length == 4) {
       bonusPSum += 0.05;
-      if (Number(arg[2]) > 65000) {
+      if (Number(Person.salary) > 65000) {
         bonusPSum -= 0.01;
       }
     }
@@ -60,26 +72,20 @@ function logic(arg) {
     bonusPSum = 1.13;
   }
 
-  arg[2] *= bonusPSum;
+  localArray[0] = Person.name;
 
-  arg[2] = Math.round(arg[2]);
-
-  localArray[2] = arg[2];
-
-  //Second index
-  //bonusPSum = bonusPSum.toString();
-  //bonusPsum = bonusPSum.substring(2);
-  //bonusPsum = Number(bonusPSum);
   localArray[1] = bonusPSum - 1;
 
-  localArray[0] = arg[0];
+  Person.salary *= bonusPSum;
+  Person.salary = Math.round(Person.salary);
+  localArray[2] = Person.salary;
 
-  localArray[3] = Math.round(Number(arg[2]) * localArray[1]);
+  localArray[3] = Math.round(Number(Person.salary) * localArray[1]);
 
   return localArray;
 }
 
-logic(atticus);
+logic(Person);
 
 ////  FINAL ARRAY THAT STORES ANSWERS ////
 
