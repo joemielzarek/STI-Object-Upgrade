@@ -97,4 +97,4 @@ function finalArray(empArray) {
   return empArray;
 }
 
-console.log(finalArray(employees));
+finalArray(employees);
